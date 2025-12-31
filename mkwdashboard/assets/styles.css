@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    --accent: #00f0ff;
+    --accent-glow: rgba(0, 240, 255, 0.4);
+    --glass-bg: rgba(20, 20, 20, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-hover: rgba(30, 30, 30, 0.9);
+    --text-main: #ffffff;
+    --text-dim: rgba(255, 255, 255, 0.6);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0f1115; /* Fallback background */
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+#app-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- 1. Background Graph --- */
+#canvas-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* --- 2. Glass Panels General --- */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.glass-panel:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+}
+
+.panel-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-top: 0;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 8px;
+}
+
+.control-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+}
+
+.glass-divider {
+    border: 0;
+    height: 1px;
+    background: var(--glass-border);
+    margin: 15px 0;
+}
+
+/* --- 3. UI Positioning --- */
+
+/* Top Left */
+#context-controls {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 280px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Top Right */
+#export-hub {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 16px;
+}
+
+/* Bottom Center */
+#control-deck {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50vw;
+    min-width: 300px;
+}
+
+/* Bottom Right Info */
+#info-panel {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    padding: 12px;
+    text-align: right;
+}
+
+/* --- 4. Component Styling --- */
+
+/* Custom Upload Button Look */
+.custom-upload div {
+    border: 1px dashed var(--glass-border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+}
+
+.custom-upload div:hover {
+    background: rgba(0, 240, 255, 0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Dash Dropdowns (The tricky part) */
+.glass-dropdown .Select-control {
+    background-color: rgba(0,0,0,0.2) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 4px !important;
+    color: white !important;
+}
+
+.glass-dropdown .Select-placeholder, 
+.glass-dropdown .Select-value-label {
+    color: var(--text-main) !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+}
+
+.glass-dropdown .Select-menu-outer {
+    background-color: #1a1a1a !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+}
+
+.glass-dropdown .Select-option {
+    background-color: transparent !important;
+    color: var(--text-dim) !important;
+}
+
+.glass-dropdown .Select-option:hover {
+    background-color: rgba(0, 240, 255, 0.1) !important;
+    color: white !important;
+}
+
+/* Compact dropdown for export */
+.compact {
+    width: 100px;
+}
+
+/* Buttons */
+.glass-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-dim);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    transition: all 0.2s;
+}
+
+.glass-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(0, 240, 255, 0.05);
+}
+
+.button-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/* Download Button */
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--accent);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #000;
+    transition: background 0.2s ease;
+}
+
+.download-btn:hover {
+    background: #fff;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.download-btn .icon {
+    width: 14px;
+    height: 14px;
+}
+
+/* --- 5. Slider Customization (Overriding React-Slider) --- */
+.rc-slider-rail {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    height: 4px !important;
+}
+
+.rc-slider-track {
+    background-color: var(--accent) !important;
+    box-shadow: 0 0 10px var(--accent-glow);
+    height: 4px !important;
+}
+
+.rc-slider-handle {
+    border: none !important;
+    background-color: var(--accent) !important;
+    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent-glow) !important;
+    width: 14px !important;
+    height: 14px !important;
+    margin-top: -5px !important; /* Center on track */
+    opacity: 1 !important;
+}
+
+.rc-slider-tooltip-inner {
+    background-color: var(--glass-hover) !important;
+    color: var(--accent) !important;
+    border: 1px solid var(--glass-border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+}
+
+/* Checklist Styling */
+.glass-checklist {
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-top: 15px;
+}
+.glass-checklist input {
+    margin-right: 8px;
+}
+
+/* Scrollbar styling for controls */
+#context-controls::-webkit-scrollbar {
+    width: 4px;
+}
+#context-controls::-webkit-scrollbar-track {
+    background: transparent;
+}
+#context-controls::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+}

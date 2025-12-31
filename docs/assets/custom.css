@@ -1,0 +1,9 @@
+.no-bullets ul {
+  list-style: none;
+  padding-left: 0.0rem;
+  margin-left: 0;
+}
+
+.no-bullets li {
+  margin: 0 0 0.4rem 0;
+}

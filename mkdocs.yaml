@@ -1,0 +1,135 @@
+site_name: Kartographer
+site_url: "https://baralll.github.io/kartographer/"
+repo_url: https://github.com/baralll/kartographer
+repo_name: baralll/kartographer
+
+use_directory_urls: true
+
+extra_css:
+  - assets/custom.css
+
+theme:
+  name: material
+  palette:
+    # palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: purple
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+    # palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: lime
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+  # UI features
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.instant
+    - navigation.tracking
+    - content.code.copy
+    - content.code.annotate
+
+    - navigation.instant.progress
+    - navigation.top
+
+    - search.highlight
+    - content.tabs.link
+
+    - content.action.edit
+
+
+  # Font Configuration
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+plugins:
+  - search
+  - glightbox
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.arithmatex
+  - pymdownx.details
+
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist
+
+  - abbr
+  - attr_list
+  - footnotes
+  - md_in_html
+  - meta
+  - admonition
+  - def_list
+  - tables
+  - attr_list
+  - md_in_html
+
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+  # Math for $...$
+  - pymdownx.arithmatex:
+      generic: true
+
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.blocks.caption
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  - pymdownx.superfences:
+        custom_fences:
+        - name: dot
+          class: dot
+          format: !!python/object/apply:graphviz_superfence.formatter
+            kwds:
+              white: var(--md-typeset-color) # replacement of white colors for dynamic light/dark mode
+
+              Gbgcolor: none # transparent background
+
+              # then everything we need to set to white
+              Gcolor: white
+              Gfontcolor: white
+              Ncolor: white
+              Nfontcolor: white
+              Ecolor: white
+              Efontcolor: white
+          validator: !!python/name:graphviz_superfence.validator
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Kartographer:
+      - Our approach: kartographer/approach.md
+      - First iteration: kartographer/first_iteration.md
+  - Dataset:
+      - Dataset availability: data/dataset_availability.md
+      - Dataset: data/dataset.md
+  - Data Visualizers:
+      - Telemetry visualizer: mkwdashboard/mkw_dashboard.md
+      - 3D track model viewer: mkwdashboard/model_viewer.md
